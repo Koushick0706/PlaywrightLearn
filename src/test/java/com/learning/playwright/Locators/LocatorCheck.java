@@ -37,7 +37,8 @@ public class LocatorCheck {
 
     @Test()
     public void findElementByText(){
-        page.navigate("https://www.amazon.in/");
+        page.navigate("https://www.amazon.com/");
+//        page.getByAltText("Continue shopping").click();
        page.getByText("Hello, sign in").click();
        PlaywrightAssertions.assertThat(page.getByText("\n" +
                "        Create a free business account\n" +
@@ -58,6 +59,30 @@ public class LocatorCheck {
         page.getByText("Sign in").click();
         PlaywrightAssertions.assertThat(page.getByText("Email address *")).isVisible();
         page.getByTitle("Practice Software Testing - Toolshop").click();
+    }
+
+    @Test
+    public void findElementByPlaceHolder(){
+        page.navigate("https://demoqa.com/automation-practice-form");
+        page.getByPlaceholder("First Name").fill("Koushick");
+    }
+
+    @Test
+    public void findElementsByLabel(){
+        page.navigate("https://qavalidation.com/demo-form/");
+        page.getByLabel("Full Name").fill("Koushick");
+    }
+
+
+    @Test
+    public void findElementByRole(){
+        page.navigate("https://www.amazon.com/");
+        page.getByAltText("Continue shopping").click();
+        page.getByText("Hello, sign in").click();
+        page.getByRole(AriaRole.TEXTBOX,new Page.GetByRoleOptions().setName("Enter your mobile number or email")).fill("koushicksudharsanam@gmail.com");
+        page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("\n" +
+                "                        Need help?\n" +
+                "                    ")).click();
     }
 
 }
