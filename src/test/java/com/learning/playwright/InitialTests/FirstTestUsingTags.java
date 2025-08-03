@@ -1,11 +1,15 @@
 package com.learning.playwright.InitialTests;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
+import com.microsoft.playwright.junit.UsePlaywright;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
-public class FirstTestUsingTags extends Baseclass {
+@UsePlaywright(Baseclass.CustomOptions.class)
+public class FirstTestUsingTags{
 
     @Test
     public void checkPageTitle(Page page) {
@@ -20,11 +24,10 @@ public class FirstTestUsingTags extends Baseclass {
     public void searchForElement(Page page) {
         page.navigate("https://practicesoftwaretesting.com/");
 //        page.locator("[placeholder=Search]").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        page.locator("[placeholder='Search']").waitFor();
-        page.locator("[placeholder='Search']").fill("Pliers");
-        page.locator("button:has-text('Search')").click();
-        int count = page.locator("(//div[@class='container'])[3]/child::a").count();
-        System.out.println("The Total Count for Search Results : " + count);
-        Assertions.assertTrue(count > 0);
+        page.getByPlaceholder("Search").fill("Pliers");
+        page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Search")).click();
+        Locator count = page.locator(".card");
+        System.out.println("The Total Count for Search Results : " + count.allTextContents());
+        PlaywrightAssertions.assertThat(count).hasCount(4);
     }
 }

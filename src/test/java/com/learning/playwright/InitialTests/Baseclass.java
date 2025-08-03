@@ -7,7 +7,7 @@ import com.microsoft.playwright.junit.UsePlaywright;
 
 import java.util.Arrays;
 
-@UsePlaywright(Baseclass.CustomOptions.class)
+
 public class Baseclass {
 
     public static class CustomOptions implements OptionsFactory{
@@ -18,7 +18,8 @@ public class Baseclass {
                     .setHeadless(false)
                     .setLaunchOptions(new BrowserType.LaunchOptions()
                             .setArgs(Arrays.asList
-                                    ("--no-sandbox","--disable-extensions","--disable-gpu","--start-maximized")));
+                                    ("--no-sandbox","--disable-extensions","--disable-gpu","--start-maximized")))
+                    .setTestIdAttribute("data-test");
         }
     }
 }
