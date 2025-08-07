@@ -7,7 +7,11 @@ import com.microsoft.playwright.options.AriaRole;
 import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -199,5 +203,8 @@ public class LocatorCheck {
         PlaywrightAssertions.assertThat(outofStockName).hasCount(1);
         PlaywrightAssertions.assertThat(outofStockName).hasText("Long Nose Pliers");
     }
+
+
+
 
 }
